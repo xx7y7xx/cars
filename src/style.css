@@ -1,3 +1,8 @@
+html, body {
+  margin: 0px;
+  padding: 0px;
+}
+
 .hello {
   color: red;
   background: url('./icon.png');

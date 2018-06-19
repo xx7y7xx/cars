@@ -1,22 +1,62 @@
 import _ from 'lodash';
+// import { Scene, PerspectiveCamera, BoxGeometry, MeshNormalMaterial, Mesh, WebGLRenderer } from 'three';
+import * as THREE from 'three';
 
 import './style.css';
 import Icon from './icon.png';
 
-function component() {
-  var element = document.createElement('div');
+// const scene = new Scene();
 
-  // Lodash, now imported by this script
-  element.innerHTML = _.join(['Hello', 'webpack'], ' ');
-  element.classList.add('hello');
+var camera, scene, renderer;
+var geometry, material, mesh;
 
-  // Add the image to our existing div.
-  var myIcon = new Image();
-  myIcon.src = Icon;
+init();
+animate();
 
-  element.appendChild(myIcon);
+function init() {
 
-  return element;
+	camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 0.01, 10 );
+	camera.position.z = 1;
+
+	scene = new THREE.Scene();
+
+	geometry = new THREE.BoxGeometry( 0.2, 0.2, 0.2 );
+	material = new THREE.MeshNormalMaterial();
+
+	mesh = new THREE.Mesh( geometry, material );
+	scene.add( mesh );
+
+	renderer = new THREE.WebGLRenderer( { antialias: true } );
+	renderer.setSize( window.innerWidth, window.innerHeight );
+	document.body.appendChild( renderer.domElement );
+
 }
 
-document.body.appendChild(component());
+function animate() {
+
+	requestAnimationFrame( animate );
+
+	mesh.rotation.x += 0.01;
+	mesh.rotation.y += 0.02;
+
+	renderer.render( scene, camera );
+
+}
+
+// function component() {
+//   var element = document.createElement('div');
+//
+//   // Lodash, now imported by this script
+//   element.innerHTML = _.join(['Hello', 'webpack'], ' ');
+//   element.classList.add('hello');
+//
+//   // Add the image to our existing div.
+//   var myIcon = new Image();
+//   myIcon.src = Icon;
+//
+//   element.appendChild(myIcon);
+//
+//   return element;
+// }
+//
+// document.body.appendChild(component());
