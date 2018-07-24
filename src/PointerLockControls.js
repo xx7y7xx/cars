@@ -4,6 +4,9 @@ import * as THREE from 'three';
 
 /**
  * @author mrdoob / http://mrdoob.com/
+ * yawObject
+ * `-- pitchObject
+ *     `-- camera
  */
 
 const PointerLockControls = function(camera) {
